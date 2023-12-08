@@ -1,0 +1,66 @@
+# Marketing Mix Modeling with Elastic Net Regression
+
+This document demonstrates the use of Elastic Net regression in R for marketing mix modeling.
+
+## Data Generation
+
+We start by generating synthetic data for advertising spends, seasonality, promotion, and sales.
+
+```R
+# Generate sample data
+set.seed(123)
+n <- 1000
+youtube_spend <- rnorm(n, mean = 5000, sd = 2000)
+facebook_spend <- rnorm(n, mean = 3000, sd = 1500)
+instagram_spend <- rnorm(n, mean = 2000, sd = 1000)
+tiktok_spend <- rnorm(n, mean = 1000, sd = 500)
+website_spend <- rnorm(n, mean = 4000, sd = 2000)
+seasonality <- sample(1:4, n, replace = TRUE) # Assuming four seasons
+promotion <- rnorm(n, mean = 1000, sd = 500)
+tv_spend <- rnorm(n, mean = 6000, sd = 2500)
+print_spend <- rnorm(n, mean = 2000, sd = 1000)
+sales <- 10000 + 2 * youtube_spend + 1.5 * facebook_spend + 1 * instagram_spend +
+  0.5 * tiktok_spend + 2.5 * website_spend + 500 * seasonality +
+  5 * promotion + 3 * tv_spend + 1.8 * print_spend + rnorm(n, sd = 5000)
+
+# Create a data frame
+data <- data.frame(
+  YouTube = youtube_spend,
+  Facebook = facebook_spend,
+  Instagram = instagram_spend,
+  TikTok = tiktok_spend,
+  Website = website_spend,
+  Seasonality = seasonality,
+  Promotion = promotion,
+  TV = tv_spend,
+  Print = print_spend,
+  Sales = sales
+)
+# ...
+
+```R
+# Split data into predictors and response
+X <- as.matrix(data[, -10]) # Predictors
+y <- data[, 10] # Response variable (Sales)
+
+# Fit Elastic Net regression model using glmnet
+enet_model <- cv.glmnet(X, y, alpha = 0.5) # 0.5 represents the ratio between Lasso and Ridge penalties
+
+# Plot the cross-validated error as a function of lambda
+plot(enet_model)
+
+# Find the optimal lambda value
+lambda_optimal <- enet_model$lambda.min
+
+# Get coefficients for the optimal lambda value
+coef(enet_model, s = lambda_optimal)
+
+# Predict using the fitted model
+predictions <- predict(enet_model, newx = X)
+
+# Assess model performance
+cor(predictions, y) # Correlation between predicted and actual sales
+
+# Visualize coefficient paths
+plot(enet_model$glmnet.fit, xvar = "lambda", label = TRUE)
+# ...
