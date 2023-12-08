@@ -18,14 +18,23 @@ Also, we used K-fold cross validation which the method is like this, it divides 
 Interpretation:
 
 Intercept: This represents the baseline or starting value of the target variable (sales) when all predictor variables are zero.
+
 Youtube: For every unit increase in spending on YouTube advertising, sales are estimated to increase by approximately 2.11 units, assuming other predictors remain constant.
+
 Facebook: Similarly, for every unit increase in spending on Facebook advertising, sales are estimated to increase by approximately 1.34 units, assuming other predictors remain constant.
+
 Instagram: Spending on Instagram advertising is associated with an estimated increase of approximately 0.96 units in sales for every unit increase in advertising spending, assuming other factors remain constant.
+
 TikTok: Likewise, spending on TikTok advertising is associated with an estimated increase of approximately 0.74 units in sales for every unit increase in advertising spending, assuming other factors remain constant.
+
 Website: For every unit increase in spending on the website, sales are estimated to increase by approximately 2.43 units, assuming other predictors remain constant.
+
 Seasonality: The impact of seasonality on sales. The value of 471.64 indicates the change in sales attributed to different seasons.
+
 Promotion: For every unit increase in promotion spending, sales are estimated to increase by approximately 4.69 units, assuming other predictors remain constant.
+
 TV: Spending on TV advertising is associated with an estimated increase of approximately 3.08 units in sales for every unit increase in advertising spending, assuming other factors remain constant.
+
 Print: Similarly, spending on print advertising is associated with an estimated increase of approximately 1.71 units in sales for every unit increase in advertising spending, assuming other factors remain constant.
 
 
